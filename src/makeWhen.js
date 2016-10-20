@@ -1,3 +1,5 @@
+var $ = require('jquery');
+
 var makeHandlerContainer = require('./makeHandlerContainer.js');
 var makeFields = require('./makeFields.js');
 
