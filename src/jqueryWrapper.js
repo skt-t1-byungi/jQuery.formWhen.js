@@ -1,19 +1,21 @@
 var $ = require('jquery');
-var makeWhen = require('./makeWhen');
+var Case = require('Case');
+
+function when(condition) {
+	return new Case(this, condition);
+}
 
 $.fn.formWhen = function(defineFunction) {
 
-    if (!$.isFunction(defineFunction)) {
-        throw new Error('invalid define!');
-    }
+	if (!$.isFunction(defineFunction)) {
+		throw new Error('invalid define!');
+	}
 
-    if (this.length === 0) {
-        return this;
-    }
+	if (this.length === 0) {
+		return this;
+	}
 
-    var when = makeWhen(this);
+	defineFunction(when.bind(this));
 
-    defineFunction(when);
-
-    return this;
+	return this;
 };

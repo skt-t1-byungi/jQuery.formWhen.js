@@ -2,16 +2,23 @@ $(function() {
 
     $('form').formWhen(function(when) {
 
+        when({ dream: 2, name: "sss" })
+            .then(function(event) {
+                $.field(this, 'name').show();
+            }, function() {
+                $.field(this, 'name').hide();
+            });
+
         when(function(v) {
-            return v.dream == 1;
-        }, function(field) {
-            field('name').hide();
-        }, function(field) {
-            field('name').show();
-        });
+                return v.dream == 2 && name == "sss";
+            })
+            .then(function(event) {
+                $.field(this, 'name').show();
+            }, function() {
+                $.field(this, 'name').hide();
+            });
 
-        when(isNotEqual, hideSelectGroup, showSelectGroup);
-
+        when(isNotEqual).then(hideSelectGroup, showSelectGroup);
     });
 
 });
