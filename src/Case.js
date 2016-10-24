@@ -5,9 +5,9 @@ function attachHandler($form, caseObj) {
         var valueObj = $form.serializeObject();
 
         if (caseObj.conditionCheck(valueObj)) {
-            caseObj.trueHandlers.fireWith(this, [event]);
+            caseObj.trueHandlers.fireWith($form, [event]);
         } else {
-            caseObj.falseHandlers.fireWith(this, [event]);
+            caseObj.falseHandlers.fireWith($form, [event]);
         }
     });
 }
@@ -53,7 +53,6 @@ Case.prototype = {
         if ($.isPlainObject(this.condition)) {
 
         }
-
 
         return this.condition;
     }

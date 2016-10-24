@@ -1,5 +1,7 @@
 var $ = require('jquery');
-var Case = require('Case');
+var Case = require('./Case.js');
+
+require('./initFormWhenEvent.js');
 
 function when(condition) {
     return new Case(this, condition);
