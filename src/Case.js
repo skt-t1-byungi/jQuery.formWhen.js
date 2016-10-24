@@ -1,13 +1,12 @@
 var $ = require('jquery');
+var equal = require('deep-equal');
 
 function attachHandler($form, caseObj) {
-    $form.on("formWhen", function(event) {
-        var valueObj = $form.serializeObject();
-
+    $form.on("formWhen", function(event, valueObj) {
         if (caseObj.conditionCheck(valueObj)) {
-            caseObj.trueHandlers.fireWith($form, [event]);
+            caseObj.trueHandlers.fireWith($form);
         } else {
-            caseObj.falseHandlers.fireWith($form, [event]);
+            caseObj.falseHandlers.fireWith($form);
         }
     });
 }
@@ -35,7 +34,7 @@ Case.prototype = {
 
     conditionCheck: function(valueObj) {
         if ($.isFunction(this.condition)) {
-            return $.proxy(this.condition(valueObj), this.$form);
+            return $this.condition.call(this.$form, valueObj);
         }
 
         //or
@@ -45,13 +44,17 @@ Case.prototype = {
                     return true;
                 }
             }
-
             return false;
         }
 
         //and
         if ($.isPlainObject(this.condition)) {
-
+            for (var k in this.condition) {
+                if (!equal(this.condition[k], valueObj[k])) {
+                    return false;
+                }
+            }
+            return true;
         }
 
         return this.condition;
