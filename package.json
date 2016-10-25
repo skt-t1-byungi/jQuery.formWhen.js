@@ -1,7 +1,7 @@
 {
     "name": "form-when.js",
     "version": "1.0.0",
-    "description": "Interactive jQuery Form Heler",
+    "description": "Interactive jQuery Form Helper",
     "main": "src/jqueryWrapper.js",
     "directories": {
         "example": "example"
