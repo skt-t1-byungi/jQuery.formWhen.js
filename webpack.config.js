@@ -13,7 +13,7 @@ module.exports = {
         "jquery": "jQuery"
     },
     plugins: [
-        // new UglifyJsPlugin(),
+        new UglifyJsPlugin(),
         new BannerPlugin('jQuery.formWhen.js\nsertion@innorix.com\nhttps://github.com/skt-t1-byungi/jQuery.formWhen')
     ]
 };
