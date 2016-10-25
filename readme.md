@@ -1,6 +1,6 @@
 jQuery.formWhen.js
 ==============================
-Interactive jQuery Form Helper
+jQuery Interactive Form Helper
 
 Browser support
 ---
