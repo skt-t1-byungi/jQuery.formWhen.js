@@ -48,3 +48,9 @@ Usage
 
 ### field(name: array|function|regex|string|number) 
 
+
+Description
+---
+폼값에 따라 동적으로 변화는 폼을 만들어야한다. 
+조건들이 복잡할 수록 코드가 복잡해진다. 
+양방향 데이터 바인딩처럼 조건에만 집중하고 싶었다. 
