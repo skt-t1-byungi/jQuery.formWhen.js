@@ -40,6 +40,8 @@ There is no difference? more complex, There is a difference.
 
 Usage
 ---
+### formWhen(define: function(when, field))
+
 ### when(condtion: object|array|function(serializeObject))
 
 #### then(trueHandler: function(field, serializeObject), falseHandler: function(field, serializeObject))
