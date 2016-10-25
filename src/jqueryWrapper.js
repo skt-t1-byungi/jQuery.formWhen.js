@@ -5,12 +5,8 @@ var Case = require('./Case.js');
 require('./fieldHelper.js');
 require('./defineFormWhenEvent.js');
 
-function when(condition) {
-    return new Case(this, condition);
-}
 
 $.fn.formWhen = function(defineFunction) {
-
     if (!$.isFunction(defineFunction)) {
         throw new Error('invalid define!');
     }
@@ -19,7 +15,15 @@ $.fn.formWhen = function(defineFunction) {
         return this;
     }
 
-    defineFunction(when.bind(this));
+    var fieldHelper = (function(name) {
+        return $.field(this, name);
+    }).bind(this);
+
+    var when = function(condition) {
+        return new Case(this, fieldHelper, condition);
+    };
+
+    defineFunction(when.bind(this), fieldHelper);
 
     return this;
 };

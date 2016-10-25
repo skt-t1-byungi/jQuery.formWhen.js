@@ -19,10 +19,10 @@ $.field = function(elem, name) {
             }
 
             var $set = $();
-
             for (var i = name.length - 1; i >= 0; i--) {
                 $set = $set.add($.field(elem, name[i]));
             }
+
             return $set;
 
         case 'function':

@@ -1,18 +1,22 @@
 {
-  "name": "form-when.js",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "directories": {
-    "example": "example"
-  },
-  "devDependencies": {},
-  "scripts": {},
-  "author": "",
-  "license": "MIT",
-  "dependencies": {
-    "debounce": "^1.0.0",
-    "deep-equal": "^1.0.1",
-    "jquery-serializeobject": "^1.0.0"
-  }
+    "name": "form-when.js",
+    "version": "1.0.0",
+    "description": "",
+    "main": "src/jqueryWrapper.js",
+    "directories": {
+        "example": "example"
+    },
+    "scripts": {
+        "watch": "webpack --watch"
+    },
+    "devDependencies": {
+        "webpack": "^1.13.2"
+    },
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+        "debounce": "^1.0.0",
+        "deep-equal": "^1.0.1",
+        "jquery-serializeobject": "^1.0.0"
+    }
 }

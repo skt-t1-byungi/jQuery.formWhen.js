@@ -3,19 +3,28 @@ var equal = require('deep-equal');
 
 function attachHandler($form, caseObj) {
     $form.on("formWhen", function(event, valueObj) {
+
         if (caseObj.conditionCheck(valueObj)) {
-            caseObj.trueHandlers.fireWith($form);
+            if (!caseObj.lastState) {
+                caseObj.lastState = true;
+                caseObj.trueHandlers.fireWith($form, [caseObj.fieldHelper, valueObj]);
+            }
         } else {
-            caseObj.falseHandlers.fireWith($form);
+            if (caseObj.lastState) {
+                caseObj.lastState = false;
+                caseObj.falseHandlers.fireWith($form, [caseObj.fieldHelper, valueObj]);
+            }
         }
     });
 }
 
-var Case = function($form, condition) {
+var Case = function($form, fieldHelper, condition) {
     this.$form = $form;
-    this.condtion = condtion;
+    this.condition = condition;
+    this.lastState = null;
     this.trueHandlers = $.Callbacks();
     this.falseHandlers = $.Callbacks();
+    this.fieldHelper = fieldHelper;
 
     attachHandler($form, this);
 };
@@ -27,20 +36,22 @@ Case.prototype = {
         }
 
         if ($.isFunction(falseHandler)) {
-            this.falseHandlers.add(trueHandler);
+            this.falseHandlers.add(falseHandler);
         }
         return this;
     },
 
-    conditionCheck: function(valueObj) {
-        if ($.isFunction(this.condition)) {
-            return $this.condition.call(this.$form, valueObj);
+    conditionCheck: function(valueObj, condition) {
+        condition = condition || this.condition;
+
+        if ($.isFunction(condition)) {
+            return condition.call(this.$form, valueObj);
         }
 
         //or
-        if ($.isArray(this.condition)) {
-            for (var i = this.condition.length - 1; i >= 0; i--) {
-                if (this.conditionCheck(this.condition[i])) {
+        if ($.isArray(condition)) {
+            for (var i = condition.length - 1; i >= 0; i--) {
+                if (this.conditionCheck(valueObj, condition[i])) {
                     return true;
                 }
             }
@@ -48,17 +59,16 @@ Case.prototype = {
         }
 
         //and
-        if ($.isPlainObject(this.condition)) {
-            for (var k in this.condition) {
-                if (!equal(this.condition[k], valueObj[k])) {
+        if ($.isPlainObject(condition)) {
+            for (var k in condition) {
+                if (!equal(condition[k], valueObj[k])) {
                     return false;
                 }
             }
             return true;
         }
-
         return this.condition;
-    }
+    },
 };
 
 module.exports = Case;
