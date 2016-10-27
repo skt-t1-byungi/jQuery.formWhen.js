@@ -48,7 +48,6 @@ There is no difference? more complex, There is a difference.
 Usage
 ---
 ### formWhen(define: function(when, field))
----
 ```js
 $form = $("form").formWhen(function(when, field){
 
@@ -60,7 +59,6 @@ $form = $("form").formWhen(function(when, field){
 ```
 
 ### when(condtion: object|array|function(serializeObject))
----
 이벤트 발생하는 condtion을 정의합니다.
 
 #### function condtion
