@@ -6,13 +6,6 @@ Browser support
 ---
 IE 9 <= *
 
-
-Description
----
-폼값에 따라 동적으로 변화는 폼을 만들어야한다. 
-조건들이 복잡할 수록 코드가 복잡해진다. 
-양방향 데이터 바인딩처럼 값과 조건에만 집중하고 싶었다. 
-
 What?
 ---
 ### before
@@ -117,3 +110,10 @@ var $form = $("form").formWhen(function(when/* , field */){
 
 ### field(name: array|function|regex|string|number) 
 jquery 래핑된 폼 필드를 쉽게 갖고 오는 헬퍼입니다.
+
+
+Description
+---
+폼값에 따라 동적으로 변화는 폼을 만들어야한다. 
+조건들이 복잡할 수록 코드가 복잡해진다. 
+양방향 데이터 바인딩처럼 값과 조건에만 집중하고 싶었다. 
