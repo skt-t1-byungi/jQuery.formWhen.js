@@ -15,15 +15,15 @@ $.fn.formWhen = function(defineFunction) {
         return this;
     }
 
-    var fieldHelper = (function(name) {
+    var fieldHelper = function(name) {
         return $.field(this, name);
-    }).bind(this);
+    };
 
     var when = function(condition) {
         return new Case(this, fieldHelper, condition);
     };
 
-    defineFunction(when.bind(this), fieldHelper);
+    defineFunction(when.bind(this), fieldHelper.bind(this));
 
     return this;
 };
